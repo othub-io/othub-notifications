@@ -161,6 +161,11 @@ async function processNotifications() {
         event_data = await queries.getEventRecords('DKG Mainnet', blockchain);
       }
 
+      if(event_data.length === 0){
+        console.log(`No Notifications to send for user: ${account} on ${blockchain}.`)
+        return;
+      }
+
       if (user_record.total_shares === 1) {
         message = await notifications.TotalShares(node_data, event_data);
         message && await notifications.sendNotification(telegram_id, bot_token, message);
