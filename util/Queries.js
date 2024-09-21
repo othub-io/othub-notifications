@@ -61,7 +61,7 @@ module.exports = {
       }
 
       query =
-        "select * FROM v_nodes_notify where datetime >= (select cast(DATE_ADD(block_ts, interval 5 MINUTE) as date) as t from v_sys_staging_date)";
+        "SELECT * FROM sync_otp_mainnet.v_nodes_notify WHERE datetime >= DATE_SUB(NOW(), INTERVAL 5 MINUTE) ORDER BY datetime DESC";
       params = [];
       let event_data = [];
       if (!blockchain) {
