@@ -61,7 +61,7 @@ module.exports = {
       }
 
       query =
-        "SELECT * FROM sync_otp_mainnet.v_nodes_notify WHERE datetime >= DATE_SUB(NOW(), INTERVAL 5 MINUTE) ORDER BY datetime DESC";
+        "SELECT * FROM v_nodes_notify WHERE datetime >= DATE_SUB(NOW(), INTERVAL 5 MINUTE) ORDER BY datetime DESC";
       params = [];
       let event_data = [];
       if (!blockchain) {
