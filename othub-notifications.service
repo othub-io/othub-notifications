@@ -1,0 +1,11 @@
+[Unit]
+Description=othub.io notifications
+
+[Service]
+Type=simple
+WorkingDirectory=/root/othub-notifications
+ExecStart=/root/othub-notifications/othub-notifications.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
