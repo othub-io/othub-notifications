@@ -27,7 +27,7 @@ module.exports = {
   },
   getEventRecords: async function getEventRecords(network, blockchain) {
     try {
-      console.log(`Getting ${network} event records...`);
+      console.log(`Getting ${blockchain} event records...`);
       let query;
       let params;
       let blockchains;

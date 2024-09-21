@@ -98,6 +98,8 @@ async function dailyReport() {
 
     const concurrentNotifications = 1000;
     await Promise.all(promises.slice(0, concurrentNotifications));
+
+    console.log(`Done sending notifications.`)
   } catch (error) {
     console.error("Error processing pending uploads:", error);
   }
@@ -184,6 +186,8 @@ async function processNotifications() {
 
     const concurrentNotifications = 1000;
     await Promise.all(promises.slice(0, concurrentNotifications));
+
+    console.log(`Done sending notifications.`)
   } catch (error) {
     console.error("Error processing pending uploads:", error);
   }
