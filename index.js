@@ -186,7 +186,7 @@ async function processNotifications() {
         message && await notifications.sendNotification(telegram_id, bot_token, message);
       }
 
-      console.log(`Notifications have been sent for user: ${account} on ${blockchain}.`)
+      console.log(`Notifications have been sent to ${account} for ${node_data[0].tokenName} on ${blockchain}.`)
     });
 
     const concurrentNotifications = 1000;

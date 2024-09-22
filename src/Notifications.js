@@ -10,9 +10,9 @@ module.exports = {
     try {
 
         let message = `
-        OTHub Notification:
+        OTHub Daily Report:
 
-        ${node_data[0].tokenName} Daily Report
+        Node: ${node_data[0].tokenName} on ${node_data[0].chainName}
 
         -Delegation-
           30d APR: ${(node_data[0].APR30d * 100).toFixed(2)}%
@@ -56,7 +56,7 @@ module.exports = {
         message = `
         OTHub Notification:
 
-        Delegators have minted ${formatNumberWithSpaces(total_new_shares.toFixed(2))} shares for ${node_data[0].tokenName}.
+        Delegators have minted ${formatNumberWithSpaces(total_new_shares.toFixed(2))} shares for ${node_data[0].tokenName} on ${node_data[0].chainName}.
         `
       }
 
@@ -77,7 +77,7 @@ module.exports = {
         message = `
         OTHub Notification:
 
-        ${node_data[0].tokenName} has changed its operational fee to ${events[0].value}%.
+        ${node_data[0].tokenName} on ${node_data[0].chainName} has changed its operational fee to ${events[0].value}% .
         `
       }
 
@@ -97,7 +97,7 @@ module.exports = {
         message = `
         OTHub Notification:
 
-        ${node_data[0].tokenName} has changed its asking price to ${events[0].value}.
+        ${node_data[0].tokenName} on ${node_data[0].chainName} has changed its asking price to ${events[0].value}.
         `
       }
       
@@ -114,7 +114,7 @@ module.exports = {
         message = `
         OTHub Notification:
 
-        ${node_data[0].tokenName} has fallen below 50k stake and is no longer active.
+        ${node_data[0].tokenName} on ${node_data[0].chainName} has fallen below 50k stake and is no longer active.
         `
       }
       
