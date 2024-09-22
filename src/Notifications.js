@@ -15,7 +15,7 @@ module.exports = {
         ${node_data[0].tokenName} Daily Report
 
         -Delegation-
-          30d APR: ${(APR30d * 100).toFixed(2)}%
+          30d APR: ${(node_data[0].APR30d * 100).toFixed(2)}%
           Shares: ${formatNumberWithSpaces(delegator_data[0].shares)} (${delegator_data[0].shares / node_data[0].nodeSharesTotalSupply}% of supply)
 
           Earnings: ${formatNumberWithSpaces(delegator_data[0].delegatorCurrentEarnings)} Trac
