@@ -93,7 +93,7 @@ async function dailyReport() {
         message && await notifications.sendNotification(telegram_id, bot_token, message);
       }
 
-      console.log(`Daily Report for ${node_data[0].tokenName} has been sent for user:${account} on ${blockchain}.`)
+      console.log(`Daily Report has been sent to ${account} for ${node_data[0].tokenName} on ${blockchain}.`)
     });
 
     const concurrentNotifications = 1000;
@@ -162,7 +162,7 @@ async function processNotifications() {
       }
 
       if(event_data.length === 0){
-        console.log(`No Notifications to send for user: ${account} on ${blockchain}.`)
+        console.log(`No Notifications to send to ${account} for ${node_data[0].tokenName} on ${blockchain}.`)
         return;
       }
 
