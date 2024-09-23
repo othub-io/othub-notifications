@@ -16,22 +16,22 @@ module.exports = {
 
         -Delegation-
           30d APR: ${(node_data[0].APR30d * 100).toFixed(2)}%
-          Shares: ${formatNumberWithSpaces(delegator_data[0].shares)} (${delegator_data[0].shares / node_data[0].nodeSharesTotalSupply}% of supply)
+          Shares: ${formatNumberWithSpaces(Number(delegator_data[0].shares).toFixed(2))} (${formatNumberWithSpaces(Number(delegator_data[0].shares / node_data[0].nodeSharesTotalSupply * 100).toFixed(2))}% of supply)
 
-          Earnings: ${formatNumberWithSpaces(delegator_data[0].delegatorCurrentEarnings)} Trac
-          Prospective Earnings: ${formatNumberWithSpaces(delegator_data[0].delegatorCurrentEarnings)} Trac
+          Earnings: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorCurrentEarnings).toFixed(2))} Trac
+          Prospective Earnings: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorCurrentEarnings).toFixed(2))} Trac
 
-          Value: ${formatNumberWithSpaces(delegator_data[0].delegatorStakeValueCurrent)} Trac
-          Prospective Value: ${formatNumberWithSpaces(delegator_data[0].delegatorStakeValueFutur)} Trac
+          Value: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorStakeValueCurrent).toFixed(2))} Trac
+          Prospective Value: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorStakeValueFuture).toFixed(2))} Trac
 
         -Node-
-          24H Pubs: ${formatNumberWithSpaces(node_data_24h[0].pubsCommited)}
-          24H Earnings: ${formatNumberWithSpaces(node_data_24h[0].estimatedEarnings)} Trac
-          24H Rewards: ${formatNumberWithSpaces(node_data_24h[0].cumulativePayouts)} Trac
+          24H Pubs: ${formatNumberWithSpaces(Number(node_data_24h[0].pubsCommited1stEpochOnly))}
+          24H Earnings: ${formatNumberWithSpaces(Number(node_data_24h[0].estimatedEarnings1stEpochOnly).toFixed(2))} Trac
+          24H Rewards: ${formatNumberWithSpaces(Number(node_data_24h[0].cumulativePayouts).toFixed(2))} Trac
 
-          Shares: ${formatNumberWithSpaces(node_data[0].nodeSharesTotalSupply)} shares
-          Ask: ${node_data[0].nodeAsk}
-          Operational Fee: ${node_data[0].nodeOperatorFee}%
+          Shares: ${formatNumberWithSpaces(Number(node_data[0].nodeSharesTotalSupply).toFixed(2))} shares
+          Ask: ${node_data[0].nodeAsk ? `${node_data[0].nodeAsk}%` : 'Not Set'}
+          Operational Fee: ${node_data[0].nodeOperatorFee ? `${node_data[0].nodeOperatorFee}%` : 'Not Set'}
         `
         return message;
     } catch (error) {
@@ -73,7 +73,6 @@ module.exports = {
       let message;
 
       if(events.length > 0){
-        console.log(JSON.stringify(events))
         message = `
         OTHub Notification:
 
