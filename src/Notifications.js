@@ -19,7 +19,7 @@ module.exports = {
           Shares: ${formatNumberWithSpaces(Number(delegator_data[0].shares).toFixed(2))} (${formatNumberWithSpaces(Number(delegator_data[0].shares / node_data[0].nodeSharesTotalSupply * 100).toFixed(2))}% of supply)
 
           Earnings: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorCurrentEarnings).toFixed(2))} Trac
-          Prospective Earnings: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorCurrentEarnings).toFixed(2))} Trac
+          Prospective Earnings: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorFutureEarnings).toFixed(2))} Trac
 
           Value: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorStakeValueCurrent).toFixed(2))} Trac
           Prospective Value: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorStakeValueFuture).toFixed(2))} Trac
@@ -30,7 +30,7 @@ module.exports = {
           24H Rewards: ${formatNumberWithSpaces(Number(node_data_24h[0].cumulativePayouts).toFixed(2))} Trac
 
           Shares: ${formatNumberWithSpaces(Number(node_data[0].nodeSharesTotalSupply).toFixed(2))} shares
-          Ask: ${node_data[0].nodeAsk ? `${node_data[0].nodeAsk}%` : 'Not Set'}
+          Ask: ${node_data[0].nodeAsk ? `${node_data[0].nodeAsk}` : 'Not Set'}
           Operational Fee: ${node_data[0].nodeOperatorFee ? `${node_data[0].nodeOperatorFee}%` : 'Not Set'}
         `
         return message;
