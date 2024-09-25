@@ -218,5 +218,6 @@ async function processNotifications() {
   }
 }
 
-startDailyReport();
+//startDailyReport();
+dailyReport();
 processNotifications();
