@@ -150,7 +150,7 @@ module.exports = {
   },
   getNodeRecords24H: async function getNodeRecords24H(blockchain) {
     try {
-      console.log(`Getting ${blockchain} 24 node records...`);
+      console.log(`Getting ${blockchain} 24H node records...`);
 
       let query = "select * FROM v_nodes_stats_last24h";
       let params = [];

@@ -5,28 +5,52 @@ function formatNumberWithSpaces(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function escapeMarkdownV2(text) {
+  return text
+    .replace(/\./g, '\\.')
+    .replace(/\-/g, '\\-')
+    .replace(/\_/g, '\\_')
+    .replace(/\(/g, '\\(')
+    .replace(/\)/g, '\\)')
+    .replace(/\!/g, '\\!')
+    .replace(/\*/g, '\\*')
+    .replace(/\[/g, '\\[')
+    .replace(/\]/g, '\\]')
+    .replace(/\~/g, '\\~')
+    .replace(/\`/g, '\\`')
+    .replace(/\>/g, '\\>')
+    .replace(/\#/g, '\\#')
+    .replace(/\+/g, '\\+')
+    .replace(/\=/g, '\\=')
+    .replace(/\|/g, '\\|')
+    .replace(/\{/g, '\\{')
+    .replace(/\}/g, '\\}');
+}
+
 module.exports = {
   DailyReport: async function DailyReport(node_data, delegator_data, node_data_24h) {
     try {
         let message = `
-== ${node_data[0].tokenName} Daily Report 📊 ==
+📊Daily Report📊
+
+⛓${node_data[0].tokenName} on ${node_data[0].chainName}⛓
 
 Delegations
-  🧾 Stake: ${formatNumberWithSpaces(Number(delegator_data[0].shares).toFixed(2))} (${formatNumberWithSpaces(Number(delegator_data[0].shares / node_data[0].nodeSharesTotalSupply * 100).toFixed(2))}% share)
+  📈 30d APR: ${(node_data[0].APR30d * 100).toFixed(2)}%
+  ⚖️ Stake: ${formatNumberWithSpaces(Number(delegator_data[0].shares).toFixed(2))} (${formatNumberWithSpaces(Number(delegator_data[0].shares / node_data[0].nodeSharesTotalSupply * 100).toFixed(2))}% of supply)
   💰 Earnings: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorCurrentEarnings).toFixed(2))} 
   🔮 Prospective Earnings: ${formatNumberWithSpaces(Number(delegator_data[0].delegatorFutureEarnings).toFixed(2))} 
 
 Node
-  ⛓ Chain: ${node_data[0].chainName}
-  ⚖️ Total stake: ${formatNumberWithSpaces(Number(node_data[0].nodeSharesTotalSupply).toFixed(2))}
-  📈 30d APR: ${(node_data[0].APR30d * 100).toFixed(2)}%
   🏆 24h Pubs: ${formatNumberWithSpaces(Number(node_data_24h[0].pubsCommited1stEpochOnly))}
-  💸 24h Earnings: ${formatNumberWithSpaces(Number(node_data_24h[0].estimatedEarnings1stEpochOnly).toFixed(2))} 
-  🎁 24h Rewards: ${formatNumberWithSpaces(Number(node_data_24h[0].cumulativePayouts).toFixed(2))} 
-  ⚙️ Ask: ${node_data[0].nodeAsk ? `${node_data[0].nodeAsk}` : 'Not Set'}
-  🪙 Operator Fee: ${node_data[0].nodeOperatorFee ? `${node_data[0].nodeOperatorFee}%` : 'Not Set'}
+  💰 24h Earnings: ${formatNumberWithSpaces(Number(node_data_24h[0].estimatedEarnings1stEpochOnly).toFixed(2))} 
+  🔮 24h Rewards: ${formatNumberWithSpaces(Number(node_data_24h[0].cumulativePayouts).toFixed(2))} 
 
-  👉 Brought to you by OTHub.io 👈
+  ⚖️ Total Stake: ${formatNumberWithSpaces(Number(node_data[0].nodeSharesTotalSupply).toFixed(2))}
+  ⚙️ Ask: ${node_data[0].nodeAsk ? `${node_data[0].nodeAsk}` : 'Not Set'}
+  🧾 Operator Fee: ${node_data[0].nodeOperatorFee ? `${node_data[0].nodeOperatorFee}%` : 'Not Set'}
+
+👉 Brought to you by OTHub.io 👈
         `
         return message;
     } catch (error) {
@@ -51,7 +75,7 @@ Node
         message = `
 🟢 New Delegation Alert! 🟢
 
-Delegators have staked ${formatNumberWithSpaces(total_new_shares.toFixed(2))} TRAC for ${node_data[0].tokenName} on ${node_data[0].chainName}.
+Delegators have staked ${formatNumberWithSpaces(total_new_shares.toFixed(2))} TRAC to ${node_data[0].tokenName} on ${node_data[0].chainName}.
 The new total stake is now ${formatNumberWithSpaces(Number(node_data[0].nodeSharesTotalSupply).toFixed(2))}!
 
 👉 Find out more on OTHub.io 👈
@@ -133,7 +157,8 @@ ${node_data[0].tokenName} on ${node_data[0].chainName} has fallen below 50k stak
   ) {
     try {
       const bot = new Telegraf(bot_token);
-      await bot.telegram.sendMessage(telegram_id, message, { parse_mode: 'MarkdownV2' });
+      const escapedMessage = escapeMarkdownV2(message); // Escape special characters
+      await bot.telegram.sendMessage(telegram_id, escapedMessage, { parse_mode: 'MarkdownV2' });
     } catch (error) {
       console.log(error);
     }
