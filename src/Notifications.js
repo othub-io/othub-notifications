@@ -71,7 +71,7 @@ Node
         }
       }
 
-      if(total_new_shares > 0){
+      if(total_new_shares > 1){
         message = `
 🟢 New Delegation Alert! 🟢
 
