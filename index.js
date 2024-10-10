@@ -22,7 +22,7 @@ function startDailyReport() {
     dailyReport();
 
     // After running at 12 PM UTC, set an interval to repeat every 24 hours (86,400,000 ms)
-    setInterval(processNotifications, 24 * 60 * 60 * 1000);
+    setInterval(dailyReport, 24 * 60 * 60 * 1000);
   }, timeUntilNext12PMUTC);
 }
 
@@ -130,6 +130,7 @@ async function processNotifications() {
       let event_data;
       let node_data;
       let message;
+      let network = "DKG Mainnet"
       let blockchain =
         chain_id === 20430
           ? "NeuroWeb Testnet"
@@ -147,6 +148,7 @@ async function processNotifications() {
 
       if (chain_id === 20430 || chain_id === 10200 || chain_id === 84532) {
         nodes = testnet_nodes;
+        network = "DKG Testnet"
       }
 
       if (chain_id === 2043 || chain_id === 100 || chain_id === 8453) {
@@ -156,7 +158,7 @@ async function processNotifications() {
       node_data = nodes.filter(
         (node) => node.nodeId === node_id && node.chainId === chain_id
       );
-      event_data = await queries.getEventRecords("DKG Testnet", blockchain);
+      event_data = await queries.getEventRecords(network, blockchain);
 
       if (event_data.length === 0) {
         console.log(
